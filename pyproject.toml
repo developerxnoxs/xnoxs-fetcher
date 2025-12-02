@@ -4,11 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xnoxs_fetcher"
-version = "3.0.0"
-description = "Advanced TradingView historical and live data fetcher"
+version = "4.0.0"
+description = "Advanced TradingView historical and live data fetcher for stocks, crypto, forex, and commodities"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
+    {name = "developerxnoxs", email = "developerxnoxs@gmail.com"}
+]
+maintainers = [
     {name = "developerxnoxs", email = "developerxnoxs@gmail.com"}
 ]
 keywords = [
@@ -18,25 +21,35 @@ keywords = [
     "crypto",
     "cryptocurrency",
     "forex",
+    "commodities",
     "market-data",
     "historical-data",
     "live-data",
     "ohlcv",
-    "pandas"
+    "pandas",
+    "websocket",
+    "real-time",
+    "financial-data"
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Office/Business :: Financial :: Investment",
     "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Information Analysis",
     "Typing :: Typed"
 ]
 requires-python = ">=3.9"
@@ -48,12 +61,27 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+export = [
+    "openpyxl>=3.1.0",
+    "pyarrow>=14.0.0"
+]
 dev = [
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",
+    "pytest-asyncio>=0.21.0",
     "black>=23.0.0",
     "mypy>=1.0.0",
-    "ruff>=0.1.0"
+    "ruff>=0.1.0",
+    "types-requests>=2.31.0",
+    "pandas-stubs>=2.0.0"
+]
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.0.0",
+    "mkdocstrings[python]>=0.24.0"
+]
+all = [
+    "xnoxs_fetcher[export,dev,docs]"
 ]
 
 [project.urls]
@@ -61,6 +89,125 @@ Homepage = "https://github.com/developerxnoxs/xnoxs_fetcher"
 Documentation = "https://github.com/developerxnoxs/xnoxs_fetcher#readme"
 Repository = "https://github.com/developerxnoxs/xnoxs_fetcher"
 "Bug Tracker" = "https://github.com/developerxnoxs/xnoxs_fetcher/issues"
+Changelog = "https://github.com/developerxnoxs/xnoxs_fetcher/blob/main/CHANGELOG.md"
 
-[tool.setuptools.packages.find]
-exclude = ["tests", "tests.*"]
+[tool.setuptools]
+packages = ["xnoxs_fetcher"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+xnoxs_fetcher = ["py.typed"]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 100
+exclude = [
+    ".git",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".venv",
+    "venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "*.egg-info"
+]
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # Pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "UP",     # pyupgrade
+    "N",      # pep8-naming
+    "SIM",    # flake8-simplify
+    "TCH",    # flake8-type-checking
+    "PTH",    # flake8-use-pathlib
+    "RUF"     # Ruff-specific rules
+]
+ignore = [
+    "E501",   # line too long (handled by formatter)
+    "B008",   # do not perform function calls in argument defaults
+    "C901",   # too complex
+    "N806",   # variable in function should be lowercase
+    "SIM108"  # use ternary operator instead of if-else
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["xnoxs_fetcher"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+strict_equality = true
+extra_checks = true
+check_untyped_defs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = true
+no_implicit_optional = true
+show_error_codes = true
+show_column_numbers = true
+pretty = true
+
+[[tool.mypy.overrides]]
+module = [
+    "websocket.*",
+    "pandas.*"
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-ra",
+    "-q",
+    "--strict-markers",
+    "--strict-config"
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::UserWarning"
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "network: marks tests that require network access"
+]
+
+[tool.coverage.run]
+source = ["xnoxs_fetcher"]
+branch = true
+omit = [
+    "tests/*",
+    "*/__pycache__/*"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+    "if __name__ == .__main__.:"
+]
+show_missing = true
+precision = 2
+
+[tool.coverage.html]
+directory = "htmlcov"

@@ -7,7 +7,7 @@ data streaming with callback-based consumers.
 
 Author: developerxnoxs
 License: MIT License
-Version: 3.0.0
+Version: 4.0.0
 """
 
 from __future__ import annotations
@@ -15,8 +15,12 @@ from __future__ import annotations
 from .core import XnoxsFetcher, TimeFrame, FetcherConfig
 from .live_feed import XnoxsLiveFeed
 from .models import SymbolSet, DataConsumer
+from .auth import AuthManager, AuthConfig, SessionData, RateLimiter
+from .export import DataExporter, quick_export
+from .websocket_manager import WebSocketManager, WebSocketConfig, ConnectionState, WebSocketPool
+from .parallel import ParallelFetcher, ParallelConfig, FetchTask, FetchResult, fetch_parallel, BatchExporter
 
-__version__ = "3.0.0"
+__version__ = "4.0.0"
 __author__ = "developerxnoxs"
 
 TvDatafeed = XnoxsFetcher
@@ -37,4 +41,20 @@ __all__ = [
     "TvDatafeedLive",
     "Seis",
     "Consumer",
+    "AuthManager",
+    "AuthConfig",
+    "SessionData",
+    "RateLimiter",
+    "DataExporter",
+    "quick_export",
+    "WebSocketManager",
+    "WebSocketConfig",
+    "ConnectionState",
+    "WebSocketPool",
+    "ParallelFetcher",
+    "ParallelConfig",
+    "FetchTask",
+    "FetchResult",
+    "fetch_parallel",
+    "BatchExporter",
 ]

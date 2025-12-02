@@ -1,0 +1,15 @@
+{
+  "token": "eyJhbGciOiJSUzUxMiIsImtpZCI6IkdaeFUiLCJ0eXAiOiJKV1QifQ.eyJ1c2VyX2lkIjoxMjIwODg1NjIsImV4cCI6MTc2NDcwNjM1OCwiaWF0IjoxNzY0NjkxOTU4LCJwbGFuIjoiIiwicHJvc3RhdHVzIjpudWxsLCJleHRfaG91cnMiOjEsInBlcm0iOiJuc2UiLCJzdHVkeV9wZXJtIjoiIiwibWF4X3N0dWRpZXMiOjIsIm1heF9mdW5kYW1lbnRhbHMiOjEsIm1heF9jaGFydHMiOjEsIm1heF9hY3RpdmVfYWxlcnRzIjozLCJtYXhfc3R1ZHlfb25fc3R1ZHkiOjEsImZpZWxkc19wZXJtaXNzaW9ucyI6W10sIm1heF9hbGVydF9jb25kaXRpb25zIjpudWxsLCJtYXhfb3ZlcmFsbF9hbGVydHMiOjIwMDAsIm1heF9hY3RpdmVfcHJpbWl0aXZlX2FsZXJ0cyI6MywibWF4X2FjdGl2ZV9jb21wbGV4X2FsZXJ0cyI6MCwibWF4X2Nvbm5lY3Rpb25zIjoyfQ.TUo-SqtV7ScOvMtWhnSmA4ZnmrwfgD_Io16HWmPuWM670fyfKjqa17u4yd_7mXBB_0VhdzlEiw36opuiWp4hfJEdz9e07Ig0Z__MDUtC1nV0DThShubnXBguNpZGqXns4aYi_sZiiY9ZhRNXJ5xexagTuplKMoFf776gi9DUh7s",
+  "session_id": "fmy71l01j1t8l5gds95ifpaiv6iyasix",
+  "username": "xnoxsshutdown",
+  "created_at": "2025-12-02T16:12:39.050076",
+  "expires_at": "2026-03-02T16:12:39.050080",
+  "cookies": {
+    "cookiePrivacyPreferenceBannerProduction": "notApplicable",
+    "cookiesSettings": "{\"analytics\":true,\"advertising\":true}",
+    "device_t": "Y3V4R0J3OjA.yWeGPxfHbdWKcEgBWsmy0Mi7LLk6f4rbCP8M71dsehI",
+    "sessionid": "fmy71l01j1t8l5gds95ifpaiv6iyasix",
+    "sessionid_sign": "v3:TVE8VrUcTiG/Bm8k4uWzZ52BUcy6GbP9q6d9OMFJWBc=",
+    "MjBxDjGKZ": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..xX4AlSSYNrnCQBpW.HkG9dXTyXglAFph2JhhYoSYIIjfRtevL6aXgXGaoW7cqVptzncSHo2FGB7upZkED-nPpiFvRakIGvEIUGkWQ7_VMTsoBkeSz-ovldZYWYt0SsxOl9OFoB7czfYO8iNdaQrQUUDj94G5DwU3EOuO_OK-cqbIm22GPOrbUhDB_6Jw6-HwHXpYBbhthloJh8Cuz7um8l72nXqrOc4iGlcaOPmifKZ8zBBopY0V2r8ZIAqek5LKmqKqZwgi8iNRYKDJFrSdBjaWvx-dLj2Vu5r2qhgRaTeuFAmZluVoTDKi-ElLE.Gsp7nCM6Wy2pjoyx5D39rg"
+  }
+}

@@ -1,0 +1,60 @@
+modules = ["python-3.11"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+packages = ["arrow-cpp", "glibcLocales", "pkg-config"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Run Demo"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Test Login"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Features Demo"
+
+[[workflows.workflow]]
+name = "Run Demo"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python demo.py"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[[workflows.workflow]]
+name = "Test Login"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python test_login.py"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[[workflows.workflow]]
+name = "Features Demo"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python demo_features.py"
+
+[workflows.workflow.metadata]
+outputType = "console"

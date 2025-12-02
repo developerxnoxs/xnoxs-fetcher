@@ -187,25 +187,69 @@ class XnoxsFetcher:
         """
         if username is None or password is None:
             return None
-            
-        payload = {
-            "username": username,
-            "password": password,
-            "remember": "on"
+        
+        headers = {
+            "Host": "www.tradingview.com",
+            "Origin": "https://www.tradingview.com",
+            "Referer": "https://www.tradingview.com/",
+            "User-Agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.7444.102 Mobile Safari/537.36",
+            "Accept": "*/*",
+            "Accept-Encoding": "gzip, deflate, br, zstd",
+            "Accept-Language": "id,id-ID;q=0.9,en-US;q=0.8,en;q=0.7",
+            "x-language": "en",
+            "x-requested-with": "XMLHttpRequest",
+            "sec-ch-ua": '"Chromium";v="142", "Android WebView";v="142", "Not_A Brand";v="99"',
+            "sec-ch-ua-mobile": "?1",
+            "sec-ch-ua-platform": '"Android"',
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "same-origin",
+            "sec-fetch-site": "same-origin",
         }
-        headers = {"Referer": "https://www.tradingview.com"}
+        
+        files = {
+            "username": (None, username),
+            "password": (None, password),
+            "remember": (None, "true"),
+        }
         
         try:
-            response = requests.post(
+            session = requests.Session()
+            
+            session.cookies.set("cookiePrivacyPreferenceBannerProduction", "notApplicable", domain=".tradingview.com")
+            session.cookies.set("cookiesSettings", '{"analytics":true,"advertising":true}', domain=".tradingview.com")
+            
+            response = session.post(
                 self._config.sign_in_url,
-                data=payload,
+                files=files,
                 headers=headers,
-                timeout=10
+                timeout=15
             )
             response.raise_for_status()
-            return response.json()["user"]["auth_token"]
-        except Exception as exc:
-            logger.error(f"Authentication failed: {exc}")
+            
+            result = response.json()
+            
+            if result.get("error"):
+                logger.error(f"Login error: {result['error']}")
+                return None
+            
+            user_data = result.get("user", {})
+            
+            if "auth_token" in user_data:
+                logger.info(f"Login successful for user: {user_data.get('username')}")
+                return user_data["auth_token"]
+            
+            if "sessionid" in session.cookies:
+                logger.info(f"Login successful (session-based) for user: {user_data.get('username')}")
+                return session.cookies.get("sessionid")
+            
+            logger.warning("Login succeeded but no auth token found, using session cookies")
+            return f"session:{session.cookies.get('sessionid', 'unknown')}"
+            
+        except requests.exceptions.RequestException as exc:
+            logger.error(f"Authentication request failed: {exc}")
+            return None
+        except (KeyError, ValueError) as exc:
+            logger.error(f"Authentication failed to parse response: {exc}")
             return None
     
     def _establish_websocket(self) -> None:
