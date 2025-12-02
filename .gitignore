@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.env
+.venv
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.project
+.pydevproject
+
+# Jupyter
+.ipynb_checkpoints/
+
+# CSV outputs
+*.csv
+
+# macOS
+.DS_Store
+
+# Project specific
+tvDatafeed/symbols.pkl
+tvDatafeed/beta.py
+main_test.py
+
+# pytest
+.pytest_cache/
